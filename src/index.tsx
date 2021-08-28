@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Counter from './components/pages/Counter';
+import List from './components/pages/List';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Counter />
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Counter} />
+          <Route path="/counter" component={Counter} />
+          <Route path="/list" component={List} />
+        </Switch>
+      </Suspense>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
